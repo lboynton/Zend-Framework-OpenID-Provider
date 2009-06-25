@@ -3,6 +3,11 @@ body
     background:#EFEFEF;
     margin:25px 0 0 0;
 }
+h1 a
+{
+    text-decoration:none;
+    color:inherit;
+}
 #container
 {
     background:#FFF;
