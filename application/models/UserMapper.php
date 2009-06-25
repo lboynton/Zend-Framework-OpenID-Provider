@@ -69,14 +69,22 @@ class Default_Model_UserMapper
 
     public function save(Default_Model_User $user)
     {
+        $data = array
+        (
+            'username' => $user->getUsername(),
+            'password' => md5($user->getUsername().$user->getPassword()),
+            'created'  => date('Y-m-d H:i:s')
+        );
+        
         if (null === ($id = $user->getId()))
         {
-            $storage = new OpenId_OpenId_Provider_Storage_Db(new Default_Model_DbTable_User(), new Default_Model_DbTable_Site(), new Default_Model_DbTable_Association());
-            $server = new Zend_OpenId_Provider("/provider/login", "/provider/trust", null, $storage);
+            //$storage = new OpenId_OpenId_Provider_Storage_Db(new Default_Model_DbTable_User(), new Default_Model_DbTable_Site(), new Default_Model_DbTable_Association());
+            //$server = new Zend_OpenId_Provider("/provider/login", "/provider/trust", null, $storage);
 
-            $username = Zend_OpenId::absoluteURL('/?user=' . $user->getUsername());
+            //$username = Zend_OpenId::absoluteURL('/?user=' . $user->getUsername());
 
-            $server->register($username, $user->getPassword());
+            $this->getDbTable()->insert($data);
+            //$server->register($user->getUsername(), $user->getPassword());
         }
         else
         {

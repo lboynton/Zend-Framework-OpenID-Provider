@@ -62,7 +62,7 @@ class UserController extends Zend_Controller_Action
             {
                 $model = new Default_Model_User($form->getValues());
                 $model->save();
-                return $this->_helper->redirector('index');
+                return $this->_helper->redirector('login');
             }
         }
 
@@ -81,13 +81,39 @@ class UserController extends Zend_Controller_Action
         {
             if ($form->isValid($request->getPost()))
             {
-                
+                $adapter = $this->getAuthAdapter($form->getValues());
+                $auth    = Zend_Auth::getInstance();
+                $result  = $auth->authenticate($adapter);
+
+                if (!$result->isValid())
+                {
+                    $form->setDescription('Sorry, the username and password you entered were invalid.');
+                }
+                else
+                {
+                    $this->_helper->redirector('index', 'user');
+                }
             }
         }
         
         $this->view->form = $form;
     }
 
+    public function getAuthAdapter(array $params)
+    {
+        $dbAdapter = Zend_Db_Table::getDefaultAdapter();
 
+        $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+
+        $params['password'] = md5($params['username'].$params['password']);
+
+        $authAdapter
+            ->setTableName('users')
+            ->setIdentityColumn('username')
+            ->setCredentialColumn('password')
+            ->setIdentity($params['username'])
+            ->setCredential($params['password']);
+
+        return $authAdapter;
+    }
 }
-
