@@ -52,7 +52,7 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->title = "Register";
         $this->view->headTitle($this->view->title, 'PREPEND');
-        
+
         $request = $this->getRequest();
         $form    = new Default_Form_UserRegister();
 
@@ -95,8 +95,14 @@ class UserController extends Zend_Controller_Action
                 }
             }
         }
-        
+
         $this->view->form = $form;
+    }
+
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        $this->_helper->redirector('login', 'user');
     }
 
     public function getAuthAdapter(array $params)
