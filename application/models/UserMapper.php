@@ -73,7 +73,8 @@ class Default_Model_UserMapper
         (
             'username' => $user->getUsername(),
             'password' => md5($user->getUsername().$user->getPassword()),
-            'created'  => date('Y-m-d H:i:s')
+            'created'  => date('Y-m-d H:i:s'),
+            'openid' => Zend_OpenId::absoluteURL('/?user=' . $user->getUsername())
         );
         
         if (null === ($id = $user->getId()))

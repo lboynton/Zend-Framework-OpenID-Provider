@@ -37,7 +37,6 @@
 
 class IndexController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -45,9 +44,12 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->view->headTitle("User", 'PREPEND');
+
+        if(isset($_GET['user']))
+        {
+            $this->view->openIdServer = Zend_OpenId::absoluteURL("/provider/");
+        }
+        else $this->_redirect('/user/login');
     }
-
-
 }
-

@@ -5,6 +5,7 @@ CREATE TABLE users
     id serial NOT NULL PRIMARY KEY,
     username character varying(255) NOT NULL UNIQUE,
     password character varying(32) NOT NULL,
+    openid character varying(1000) NOT NULL,
     --name character varying(255),
     --nickname character varying(255),
     --email character varying(255),

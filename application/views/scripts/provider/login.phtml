@@ -1,0 +1,23 @@
+<form method="post" action="">
+    <fieldset>
+        <legend>OpenID Login</legend>
+        <table border="0">
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="openid_identifier" value="<?php echo htmlspecialchars($_GET['openid_identity']); ?>" /></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="openid_password" value="" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" name="openid_action" value="login" /></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+<?php if (isset($this->failedAuthentication)): ?>
+Login failed, please try again.
+<?php endif; ?>

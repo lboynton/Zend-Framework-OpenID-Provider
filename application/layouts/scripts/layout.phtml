@@ -38,33 +38,36 @@
 <?php echo $this->doctype(); ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <?php echo $this->headTitle(); ?>
-  <?php $this->headLink()->appendStylesheet('/css/blueprint/screen.css', 'screen, projection'); ?>
-  <?php $this->headLink()->appendStylesheet('/css/blueprint/print.css', 'print'); ?>
-  <?php $this->headLink()->appendStylesheet('/css/blueprint/ie.css', 'screen, projection', 'lt IE 8'); ?>
-  <?php $this->headLink()->appendStylesheet('/css/main.css', 'screen, projection'); ?>
-  <?php echo $this->headLink(); ?>
-</head>
-<body>
-    <div id="container" class="container">
-        <div id="header" class="span-20">
-            <h1><a href="/">OpenID Provider</a></h1>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle(); ?>
+        <?php $this->headLink()->appendStylesheet('/css/blueprint/screen.css', 'screen, projection'); ?>
+        <?php $this->headLink()->appendStylesheet('/css/blueprint/print.css', 'print'); ?>
+        <?php $this->headLink()->appendStylesheet('/css/blueprint/ie.css', 'screen, projection', 'lt IE 8'); ?>
+        <?php $this->headLink()->appendStylesheet('/css/main.css', 'screen, projection'); ?>
+        <?php echo $this->headLink(); ?>
+        <?php if(isset($this->openIdServer)): ?>
+        <link rel="openid.server" href="<?php echo $this->openIdServer; ?>" />
+        <?php endif; ?>
+    </head>
+    <body>
+        <div id="container" class="container">
+            <div id="header" class="span-20">
+                <h1><a href="/">OpenID Provider</a></h1>
+            </div>
+            <div id="navigation" class="span-4 last">
+                <ul>
+                    <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
+                    <li><a href="/user/logout">Logout</a></li>
+                    <?php else: ?>
+                    <li><a href="/user/login">Login</a></li>
+                    <li><a href="/user/register">Register</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <div id="content" class="span-24 last">
+                <?php echo $this->layout()->content ?>
+            </div>
         </div>
-        <div id="navigation" class="span-4 last">
-            <ul>
-                <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
-                <li><a href="/user/logout">Logout</a></li>
-                <?php else: ?>
-                <li><a href="/user/login">Login</a></li>
-                <li><a href="/user/register">Register</a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <div id="content" class="span-24 last">
-            <?php echo $this->layout()->content ?>
-        </div>
-    </div>
-</body>
+    </body>
 </html>

@@ -138,6 +138,7 @@ class OpenId_OpenId_Provider_Storage_Db extends Zend_OpenId_Provider_Storage
             'username' => $id,
             'password' => $password,
             'created'  => date('Y-m-d H:i:s'),
+            'openid' => Zend_OpenId::absoluteURL('/?user=' . $id)
         );
 
         if($this->hasUser($id)) return false;
@@ -152,8 +153,8 @@ class OpenId_OpenId_Provider_Storage_Db extends Zend_OpenId_Provider_Storage
      * @return bool
      */
     public function hasUser($id)
-    {
-        $select = $this->_usersTable->select()->where('username = ?', $id);
+    {       
+        $select = $this->_usersTable->select()->where('openid = ?', $id);
         $row = $this->_usersTable->fetchRow($select);
 
         return !($row == null);
@@ -169,12 +170,12 @@ class OpenId_OpenId_Provider_Storage_Db extends Zend_OpenId_Provider_Storage
     public function checkUser($id, $password)
     {
         $select = $this->_usersTable->select()
-            ->where('id = ?', $id)
+            ->where('openid = ?', $id)
             ->where('password = ?', $password);
 
         $row = $this->_usersTable->fetchRow($select);
 
-        return !($row == null);
+        return ($row == null);
     }
 
     /**
