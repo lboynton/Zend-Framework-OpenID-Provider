@@ -50,7 +50,14 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 /** Zend_Application */
-require_once 'Zend/Application.php';  
+require_once 'Zend/Application.php';
+
+// FirePHP
+require_once 'Zend/Log/Writer/Firebug.php';
+require_once 'Zend/Registry.php';
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+Zend_Registry::set('logger',$logger);
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(
