@@ -38,8 +38,9 @@
 <?php echo $this->doctype(); ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+    <head profile="http://www.w3.org/2005/10/profile">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="icon" type="image/gif" href="/img/openid-icon-small.gif" />
         <?php echo $this->headTitle(); ?>
         <?php $this->headLink()->appendStylesheet('/css/blueprint/screen.css', 'screen, projection'); ?>
         <?php $this->headLink()->appendStylesheet('/css/blueprint/print.css', 'print'); ?>
@@ -53,7 +54,7 @@
     <body>
         <div id="container" class="container">
             <div id="header" class="span-20">
-                <h1><a href="/">OpenID Provider</a></h1>
+                <h1><a href="/"><img src="/img/openid-icon-large.png" alt="OpenID logo" /><span>OpenID</span> Provider</a></h1>
             </div>
             <div id="navigation" class="span-4 last">
                 <ul>

@@ -39,15 +39,32 @@ body
     background:#EFEFEF;
     margin:25px 0 0 0;
 }
+h1
+{
+    color:#f7931e;
+}
+h1 span
+{
+    color:#666;
+}
 h1 a
 {
     text-decoration:none;
+    color:inherit;
+}
+h1 a:hover
+{
     color:inherit;
 }
 #container
 {
     background:#FFF;
     padding:25px;
+}
+#header img
+{
+    margin:0 10px 0 5px;
+    vertical-align:bottom;
 }
 fieldset
 {
