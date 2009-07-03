@@ -45,7 +45,23 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    // action body
+        $this->view->headTitle("User Profile", 'PREPEND');
+
+        $request = $this->getRequest();
+        $form    = new Default_Form_UserIndex();
+
+        if ($this->getRequest()->isPost())
+        {
+            if ($form->isValid($request->getPost()))
+            {
+                $model = new Default_Model_User($form->getValues());
+                $model->save();
+            }
+        }
+
+        // TODO: populate form
+        //$form->populate($model->find());
+        $this->view->form = $form;
     }
 
     public function registerAction()
@@ -91,6 +107,8 @@ class UserController extends Zend_Controller_Action
                 }
                 else
                 {
+                    // store user data in session without password
+                    Zend_Auth::getInstance()->getStorage()->write($adapter->getResultRowObject(null, 'password'));
                     $this->_helper->redirector('index', 'user');
                 }
             }

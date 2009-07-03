@@ -45,6 +45,7 @@ class Default_Model_User
     protected $_id;
     protected $_username;
     protected $_password;
+    protected $_created;
     protected $_mapper;
 
     public function __construct(array $options = null)
@@ -120,6 +121,16 @@ class Default_Model_User
         $this->_password = $password;
     }
 
+    public function setCreated($created)
+    {
+        $this->_created = $created;
+    }
+
+    public function getCreated()
+    {
+        return $this->_created;
+    }
+
     public function setMapper($mapper)
     {
         $this->_mapper = $mapper;
@@ -140,8 +151,10 @@ class Default_Model_User
         $this->getMapper()->save($this);
     }
 
-    public function find($id)
+    public function find($id = null)
     {
+        if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
+
         $this->getMapper()->find($id, $this);
         return $this;
     }

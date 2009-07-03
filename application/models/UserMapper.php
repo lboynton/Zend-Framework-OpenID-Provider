@@ -106,12 +106,14 @@ class Default_Model_UserMapper
         {
             return;
         }
-        
+
         $row = $result->current();
-        
-        $user->setId($row->id)
-            ->setUsername($row->username)
-            ->setCreated($row->created);
+
+        //die(var_dump(is_object($user)));
+
+        $user->setId($row->id);
+        $user->setUsername($row->username);
+        $user->setCreated($row->created);
     }
 
     public function fetchAll()

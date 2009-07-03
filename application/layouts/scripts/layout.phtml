@@ -59,6 +59,7 @@
             <div id="navigation" class="span-4 last">
                 <ul>
                     <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
+                    <li><a href="/user">Profile</a></li>
                     <li><a href="/user/logout">Logout</a></li>
                     <?php else: ?>
                     <li><a href="/user/login">Login</a></li>
