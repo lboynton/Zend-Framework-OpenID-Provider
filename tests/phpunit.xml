@@ -1,0 +1,5 @@
+<phpunit bootstrap="./application/bootstrap.php" colors="true">
+    <testsuite name="OpenID Provider">
+        <directory>./</directory>
+    </testsuite>
+</phpunit>

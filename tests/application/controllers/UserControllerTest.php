@@ -35,21 +35,33 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
-
-class UserControllerTest extends PHPUnit_Framework_TestCase
+class UserControllerTest extends ControllerTestCase
 {
-
-    public function setUp()
+    public function testIndexAction()
     {
-        /* Setup Routine */
+        $this->dispatch('/user');
+        $this->assertController('user');
+        $this->assertAction('index');
+    }
+    
+    public function testLoginAction()
+    {
+        $this->dispatch('/user/login');
+        $this->assertController('user');
+        $this->assertAction('login');
     }
 
-    public function tearDown()
+    public function testRegisterAction()
     {
-        /* Tear Down Routine */
+        $this->dispatch('/user/register');
+        $this->assertController('user');
+        $this->assertAction('register');
     }
 
-
+    public function testLogoutAction()
+    {
+        $this->dispatch('/user/logout');
+        $this->assertController('user');
+        $this->assertAction('logout');
+    }
 }
-
