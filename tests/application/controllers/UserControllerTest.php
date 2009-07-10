@@ -37,6 +37,11 @@
 
 class UserControllerTest extends ControllerTestCase
 {
+    public function setUp()
+    {
+        require_once APPLICATION_PATH . '/scripts/load.sqlite.php';
+    }
+    
     public function testIndexAction()
     {
         $this->dispatch('/user');
@@ -63,5 +68,38 @@ class UserControllerTest extends ControllerTestCase
         $this->dispatch('/user/logout');
         $this->assertController('user');
         $this->assertAction('logout');
+    }
+
+    public function loginUser($user, $password)
+    {
+        $this->request->setMethod('POST')
+            ->setPost(array(
+            'username' => $user,
+            'password' => $password,
+        ));
+        $this->dispatch('/user/login');
+        $this->assertRedirectTo('/user');
+        $this->resetRequest()
+            ->resetResponse();
+
+        $this->request->setPost(array());
+    }
+
+    public function testInvalidCredentials()
+    {
+        $request = $this->getRequest();
+        $request->setMethod('POST')
+            ->setPost(array(
+            'username' => '',
+            'password' => '',
+        ));
+        $this->dispatch('/user/login');
+        $this->assertNotRedirect();
+        $this->assertQuery('form');
+    }
+
+    public function testValidCredentials()
+    {
+        $this->loginUser('testuser', 'testpassword');
     }
 }
