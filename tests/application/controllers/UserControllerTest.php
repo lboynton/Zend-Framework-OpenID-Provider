@@ -39,7 +39,8 @@ class UserControllerTest extends ControllerTestCase
 {
     public function setUp()
     {
-        require_once APPLICATION_PATH . '/scripts/load.sqlite.php';
+        require_once APPLICATION_PATH . '/scripts/loadSchema.php';
+        require_once APPLICATION_PATH . '/scripts/loadData.php';
     }
     
     public function testIndexAction()
