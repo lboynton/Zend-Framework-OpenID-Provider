@@ -1,3 +1,5 @@
+-- Creates tables
+
 drop table if exists users;
 
 CREATE TABLE users
@@ -19,6 +21,8 @@ CREATE TABLE users
     --user_type character varying(10),
 );
 
+ALTER TABLE users OWNER TO openid2;
+
 drop table if exists user_details;
 
 CREATE TABLE user_details
@@ -28,6 +32,8 @@ CREATE TABLE user_details
     value character varying(255),
     primary key(user_id, key)
 );
+
+ALTER TABLE users_details OWNER TO openid2;
 
 drop table if exists sites;
 
@@ -40,6 +46,8 @@ CREATE TABLE sites
     openid character varying(2000) NOT NULL
 );
 
+ALTER TABLE sites OWNER TO openid2;
+
 drop table if exists associations;
 
 CREATE TABLE associations
@@ -48,4 +56,6 @@ CREATE TABLE associations
     secret character varying(255) NOT NULL,
     mac_func character(16) NOT NULL,
     expires integer NOT NULL
-)
+);
+
+ALTER TABLE associations OWNER TO openid2;
