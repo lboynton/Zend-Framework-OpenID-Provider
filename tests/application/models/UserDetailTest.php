@@ -36,43 +36,37 @@
  */
 
 /**
- * Description of UserDetail
+ * Test case for UserDetail model
  *
  * @author Lee Boynton
  */
-class Default_Model_UserDetail
+class UserDetailTest extends ControllerTestCase
 {
-    protected $_id;
-    protected $_key;
-    protected $_value;
+    private $userDetail;
 
-    public function getId()
+    public function setUp()
     {
-        return $this->_id;
+        parent::setUp();
+        $this->userDetail = new Default_Model_UserDetail();
+        require_once APPLICATION_PATH . '/scripts/loadSchema.php';
+        require_once APPLICATION_PATH . '/scripts/loadData.php';
     }
 
-    public function setId($id)
+    public function testGetId()
     {
-        $this->_id = $id;
+        $this->userDetail->setId(1);
+        $this->assertEquals(1, $this->userDetail->getId());
     }
 
-    public function getKey()
+    public function testGetKey()
     {
-        return $this->_key;
+        $this->userDetail->setKey("testkey");
+        $this->assertEquals("testkey", $this->userDetail->getKey());
     }
 
-    public function setKey($key)
+    public function testGetValue()
     {
-        $this->_key = $key;
-    }
-
-    public function getValue()
-    {
-        return $this->_value;
-    }
-
-    public function setValue($value)
-    {
-        $this->_value = $_value;
+        $this->userDetail->setKey("testvalue");
+        $this->assertEquals("testvalue", $this->userDetail->getKey());
     }
 }
