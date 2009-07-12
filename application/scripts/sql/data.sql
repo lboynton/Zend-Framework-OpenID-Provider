@@ -1,0 +1,1 @@
+insert into users (username, password, openid, created) VALUES ('testuser', 'a45adc8ea23392523a6431f16fbdea9d', 'http://localhost/?user=testuser', 2009);
