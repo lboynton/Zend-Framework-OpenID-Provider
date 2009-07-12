@@ -36,37 +36,12 @@
  */
 
 /**
- * Description of UserMapper
+ * Uses the data mapper design pattern to map user object to the database
  *
  * @author Lee Boynton
  */
-class Default_Model_UserMapper
+class Default_Model_UserMapper extends DataMapper
 {
-    protected $_dbTable;
-
-    public function setDbTable($dbTable)
-    {
-        if (is_string($dbTable))
-        {
-            $dbTable = new $dbTable();
-        }
-        if (!$dbTable instanceof Zend_Db_Table_Abstract)
-        {
-            throw new Exception('Invalid table data gateway provided');
-        }
-        $this->_dbTable = $dbTable;
-        return $this;
-    }
-
-    public function getDbTable()
-    {
-        if (null === $this->_dbTable)
-        {
-            $this->setDbTable('Default_Model_DbTable_User');
-        }
-        return $this->_dbTable;
-    }
-
     public function save(Default_Model_User $user)
     {
         $data = array
@@ -109,8 +84,6 @@ class Default_Model_UserMapper
 
         $row = $result->current();
 
-        //die(var_dump(is_object($user)));
-
         $user->setId($row->id);
         $user->setUsername($row->username);
         $user->setCreated($row->created);
@@ -132,4 +105,3 @@ class Default_Model_UserMapper
         return $entries;
     }
 }
-?>
