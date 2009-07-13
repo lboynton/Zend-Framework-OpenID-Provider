@@ -75,6 +75,9 @@ class Default_Model_UserDetails
 
         foreach($this->_userDetails as $detail)
         {
+            $value = $detail->getValue();
+            if(empty($value)) continue;
+            
             $details[$detail->getKey()] = $detail->getValue();
         }
 
