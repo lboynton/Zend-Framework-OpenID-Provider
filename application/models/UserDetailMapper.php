@@ -86,17 +86,17 @@ class Default_Model_UserDetailMapper extends Default_Model_DataMapper
         $user->setCreated($row->created);
     }
 
-    public function fetchAll()
+    public function fetchAll($id)
     {
-        $resultSet = $this->getDbTable()->fetchAll();
+        $resultSet = $this->getDbTable()->fetchAll($this->getDbTable()->select()->where('user_id = ?', $id));
         $entries   = array();
         foreach ($resultSet as $row)
         {
-            $entry = new Default_Model_User();
-            $entry->setId($row->id)
-                ->setUsername($row->username)
-                ->setCreated($row->created)
-                ->setMapper($this);
+            $entry = new Default_Model_UserDetail();
+            $entry->setId($row->user_id);
+            $entry->setKey($row->key);
+            $entry->setValue($row->value);
+            $entry->setMapper($this);
             $entries[] = $entry;
         }
         return $entries;

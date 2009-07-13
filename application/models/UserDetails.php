@@ -36,72 +36,29 @@
  */
 
 /**
- * Description of UserDetail
+ * Wrapper class for all of a user's details
  *
  * @author Lee Boynton
  */
-class Default_Model_UserDetail
+class Default_Model_UserDetails
 {
-    protected $_id;
-    protected $_key;
-    protected $_value;
-    protected $_mapper;
+    protected $_userDetails;
 
-    public function getId()
+    public function getUserDetails($id = null)
     {
-        return $this->_id;
-    }
-
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-
-    public function getKey()
-    {
-        return $this->_key;
-    }
-
-    public function setKey($key)
-    {
-        $this->_key = $key;
-    }
-
-    public function getValue()
-    {
-        return $this->_value;
-    }
-
-    public function setValue($value)
-    {
-        $this->_value = $value;
-    }
-
-    public function setMapper($mapper)
-    {
-        $this->_mapper = $mapper;
-        return $this;
-    }
-
-    public function getMapper()
-    {
-        if (null === $this->_mapper)
+        if(is_null($this->_userDetails))
         {
-            $this->setMapper(new Default_Model_UserDetailMapper());
+            if(is_null($id)) $id = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $mapper = new Default_Model_UserDetailMapper();
+            $details = $mapper->fetchAll($id);
+
+            foreach($details as $detail)
+            {
+                $this->_userDetails[$detail->getKey()] = $detail->getValue();
+            }
         }
-        return $this->_mapper;
-    }
 
-    public function save()
-    {
-        $this->getMapper()->save($this);
-    }
-
-    public function find($id = null)
-    {
-        if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
-
-        $this->getMapper()->find($id, $this);
-        return $this;
+        return $this->_userDetails;
     }
 }

@@ -59,8 +59,9 @@ class UserController extends Zend_Controller_Action
             }
         }
 
-        // TODO: populate form
-        //$form->populate($model->find());
+        // populate form with user details
+        $model = new Default_Model_UserDetails();
+        $form->populate($model->getUserDetails());
         $this->view->form = $form;
     }
 
