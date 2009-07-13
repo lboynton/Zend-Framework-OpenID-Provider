@@ -92,4 +92,13 @@ class Default_Model_UserDetailMapper extends DataMapper
         }
         return $entries;
     }
+
+    public function getDbTable()
+    {
+        if (null === $this->_dbTable)
+        {
+            $this->setDbTable('Default_Model_DbTable_UserMapper');
+        }
+        return $this->_dbTable;
+    }
 }

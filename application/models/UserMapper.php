@@ -40,7 +40,7 @@
  *
  * @author Lee Boynton
  */
-class Default_Model_UserMapper extends DataMapper
+class Default_Model_UserMapper extends Default_Model_DataMapper
 {
     public function save(Default_Model_User $user)
     {
@@ -103,5 +103,14 @@ class Default_Model_UserMapper extends DataMapper
             $entries[] = $entry;
         }
         return $entries;
+    }
+
+    public function getDbTable()
+    {
+        if (null === $this->_dbTable)
+        {
+            $this->setDbTable('Default_Model_DbTable_User');
+        }
+        return $this->_dbTable;
     }
 }

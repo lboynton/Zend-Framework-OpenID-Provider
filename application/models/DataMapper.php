@@ -40,7 +40,7 @@
  *
  * @author Lee Boynton
  */
-abstract class DataMapper
+abstract class Default_Model_DataMapper
 {
     protected $_dbTable;
 
@@ -56,14 +56,5 @@ abstract class DataMapper
         }
         $this->_dbTable = $dbTable;
         return $this;
-    }
-
-    public function getDbTable()
-    {
-        if (null === $this->_dbTable)
-        {
-            $this->setDbTable('Default_Model_DbTable_User');
-        }
-        return $this->_dbTable;
     }
 }
