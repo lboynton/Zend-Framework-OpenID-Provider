@@ -33,7 +33,7 @@ CREATE TABLE user_details
     primary key(user_id, key)
 );
 
-ALTER TABLE users_details OWNER TO openid2;
+ALTER TABLE user_details OWNER TO openid2;
 
 drop table if exists sites;
 
