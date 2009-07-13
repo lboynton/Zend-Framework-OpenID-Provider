@@ -54,23 +54,31 @@ class Default_Model_UserDetailMapper extends Default_Model_DataMapper
             ->where('key = ?', $userDetail->getKey());
 
         $row = $this->getDbTable()->fetchRow($select);
-
-        $data = array
-        (
-            'key' => $userDetail->getKey(),
-            'value' => $userDetail->getValue()
-        );
         
         if (is_null($row))
         {
             // key doesn't exist, insert new key
-            $data['user_id'] = $userDetail->getId();
+            $data = array
+            (
+                'user_id' => $userDetail->getId(),
+                'key' => $userDetail->getKey(),
+                'value' => $userDetail->getValue()
+            );
+
             $this->getDbTable()->insert($data);
         }
         else
         {
             // key exists, update key
-            $this->getDbTable()->update($data, array('user_id = ?' => $userDetail->getId()));
+            $data = array
+            (
+                'value' => $userDetail->getValue()
+            );
+
+            $where[] = $this->getDbTable()->getAdapter()->quoteInto('user_id = ?', $userDetail->getId());
+            $where[] = $this->getDbTable()->getAdapter()->quoteInto('key = ?', $userDetail->getKey());
+
+            $this->getDbTable()->update($data, $where);
         }
     }
 

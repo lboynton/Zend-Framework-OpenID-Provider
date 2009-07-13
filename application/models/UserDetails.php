@@ -44,21 +44,48 @@ class Default_Model_UserDetails
 {
     protected $_userDetails;
 
+    public function __construct(array $options = null)
+    {
+        if (is_array($options))
+        {
+            $this->setOptions($options);
+        }
+    }
+
+    public function setOptions(array $options)
+    {
+        $this->_userDetails = array();
+
+        foreach($options as $key => $value)
+        {
+            $detail = new Default_Model_UserDetail();
+            $detail->setKey($key);
+            $detail->setValue($value);
+            $detail->setId(Zend_Auth::getInstance()->getIdentity()->id);
+            $this->_userDetails[] = $detail;
+        }
+    }
+
     public function getUserDetails($id = null)
     {
-        if(is_null($this->_userDetails))
+        if(is_null($id)) $id = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $mapper = new Default_Model_UserDetailMapper();
+        $this->_userDetails = $mapper->findAllById($id);
+
+        foreach($this->_userDetails as $detail)
         {
-            if(is_null($id)) $id = Zend_Auth::getInstance()->getIdentity()->id;
-
-            $mapper = new Default_Model_UserDetailMapper();
-            $details = $mapper->findAllById($id);
-
-            foreach($details as $detail)
-            {
-                $this->_userDetails[$detail->getKey()] = $detail->getValue();
-            }
+            $details[$detail->getKey()] = $detail->getValue();
         }
 
-        return $this->_userDetails;
+        return $details;
+    }
+
+    public function save()
+    {
+        foreach($this->_userDetails as $detail)
+        {
+            $detail->save();
+        }
     }
 }

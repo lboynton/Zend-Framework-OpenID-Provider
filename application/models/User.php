@@ -90,7 +90,6 @@ class Default_Model_User
         return $this;
     }
 
-
     public function getId()
     {
         return $this->_id;

@@ -54,7 +54,7 @@ class UserController extends Zend_Controller_Action
         {
             if ($form->isValid($request->getPost()))
             {
-                $model = new Default_Model_User($form->getValues());
+                $model = new Default_Model_UserDetails($form->getValues());
                 $model->save();
             }
         }
