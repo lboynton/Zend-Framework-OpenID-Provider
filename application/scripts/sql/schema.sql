@@ -30,7 +30,8 @@ CREATE TABLE user_details
     user_id int NOT NULL,
     key character varying(255) NOT NULL,
     value character varying(255),
-    primary key(user_id, key)
+    primary key(user_id, key),
+    unique(user_id, key)
 );
 
 ALTER TABLE user_details OWNER TO openid2;
