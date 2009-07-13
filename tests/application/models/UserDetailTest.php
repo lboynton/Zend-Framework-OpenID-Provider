@@ -48,8 +48,6 @@ class UserDetailTest extends ControllerTestCase
     {
         parent::setUp();
         $this->userDetail = new Default_Model_UserDetail();
-        require_once APPLICATION_PATH . '/scripts/loadSchema.php';
-        require_once APPLICATION_PATH . '/scripts/loadData.php';
     }
 
     public function testGetId()
@@ -66,7 +64,7 @@ class UserDetailTest extends ControllerTestCase
 
     public function testGetValue()
     {
-        $this->userDetail->setKey("testvalue");
-        $this->assertEquals("testvalue", $this->userDetail->getKey());
+        $this->userDetail->setValue("testvalue");
+        $this->assertEquals("testvalue", $this->userDetail->getValue());
     }
 }
