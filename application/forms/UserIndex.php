@@ -46,7 +46,7 @@ class Default_Form_UserIndex extends Zend_Form
     {
         $this->setMethod('post');
 
-        $this->addElement('text', 'name', array
+        $this->addElement('text', 'fullname', array
         (
             'label'      => 'Name',
             'required'   => false,
@@ -58,6 +58,15 @@ class Default_Form_UserIndex extends Zend_Form
         (
             'label'      => 'Nickname',
             'required'   => false,
+            'filters'    => array('StringTrim', 'StripTags'),
+            'class'      => 'text'
+        ));
+
+        $this->addElement('text', 'email', array
+        (
+            'label'      => 'Email',
+            'required'   => false,
+            'validators' => array('emailAddress'),
             'filters'    => array('StringTrim', 'StripTags'),
             'class'      => 'text'
         ));
