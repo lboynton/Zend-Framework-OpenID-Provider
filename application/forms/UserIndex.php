@@ -66,6 +66,7 @@ class Default_Form_UserIndex extends Zend_Form
         (
             'label'     => 'Gender',
             'required'  => false,
+            'validators' => array(array('inArray', false, array(array('M', 'F')))),
             'multiOptions'  => array
             (
                 '' => 'Not specified',
@@ -76,10 +77,10 @@ class Default_Form_UserIndex extends Zend_Form
 
         $this->addElement('text', 'dob', array
         (
-            'label'     => 'Date of birth',
+            'label'     => 'Date of birth (dd/mm/yyyy)',
             'required'  => false,
             'class'     => 'text',
-            'validator' => 'date',
+            'validators' => array(array('date', false, array('d/m/Y'))),
             'filter'    => array('StringTrim', 'StripTags'),
         ));
 

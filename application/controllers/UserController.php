@@ -57,6 +57,10 @@ class UserController extends Zend_Controller_Action
                 $model = new Default_Model_UserDetails($form->getValues());
                 $model->save();
             }
+            else
+            {
+                $form->setDescription('Sorry, there was a problem saving your details.');
+            }
         }
 
         // populate form with user details
