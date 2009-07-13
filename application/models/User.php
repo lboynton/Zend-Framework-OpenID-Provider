@@ -148,7 +148,12 @@ class Default_Model_User
 
     public function save()
     {
-        $this->getMapper()->save($this);
+        $id = $this->getMapper()->save($this);
+
+        if (is_null($this->_id))
+        {
+            $this->_id = $id;
+        }
     }
 
     public function find($id = null)

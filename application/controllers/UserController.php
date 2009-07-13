@@ -78,6 +78,19 @@ class UserController extends Zend_Controller_Action
             {
                 $model = new Default_Model_User($form->getValues());
                 $model->save();
+
+                $detailModel = new Default_Model_UserDetail();
+                $detailModel->setKey("nickname");
+                $detailModel->setValue($form->getValue("nickname"));
+                $detailModel->setId($model->getId());
+                $detailModel->save();
+
+                $detailModel = new Default_Model_UserDetail();
+                $detailModel->setKey("name");
+                $detailModel->setValue($form->getValue("name"));
+                $detailModel->setId($model->getId());
+                $detailModel->save();
+
                 return $this->_helper->redirector('login');
             }
         }

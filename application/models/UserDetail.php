@@ -45,6 +45,7 @@ class Default_Model_UserDetail
     protected $_id;
     protected $_key;
     protected $_value;
+    protected $_mapper;
 
     public function getId()
     {
@@ -73,6 +74,26 @@ class Default_Model_UserDetail
 
     public function setValue($value)
     {
-        $this->_value = $_value;
+        $this->_value = $value;
+    }
+
+    public function setMapper($mapper)
+    {
+        $this->_mapper = $mapper;
+        return $this;
+    }
+
+    public function getMapper()
+    {
+        if (null === $this->_mapper)
+        {
+            $this->setMapper(new Default_Model_UserDetailMapper());
+        }
+        return $this->_mapper;
+    }
+
+    public function save()
+    {
+        $this->getMapper()->save($this);
     }
 }

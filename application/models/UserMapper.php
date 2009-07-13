@@ -59,7 +59,7 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
 
             //$username = Zend_OpenId::absoluteURL('/?user=' . $user->getUsername());
 
-            $this->getDbTable()->insert($data);
+            $id = $this->getDbTable()->insert($data);
             //$server->register($user->getUsername(), $user->getPassword());
         }
         else
@@ -71,6 +71,8 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
 
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
+
+        return $id;
     }
 
     public function find($id, Default_Model_User $user)

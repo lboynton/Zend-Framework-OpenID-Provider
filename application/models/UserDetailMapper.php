@@ -40,24 +40,33 @@
  *
  * @author Lee Boynton
  */
-class Default_Model_UserDetailMapper extends DataMapper
+class Default_Model_UserDetailMapper extends Default_Model_DataMapper
 {
     public function save(Default_Model_UserDetail $userDetail)
     {
         // check if key exists
-        $this->getDbTable()->select()
-            ->where('id = ?', $id)
+        $select = $this->getDbTable()->select()
+            ->where('user_id = ?', $userDetail->getId())
             ->where('key = ?', $userDetail->getKey());
 
-        $row = $table->fetchRow($select);
+        $row = $this->getDbTable()->fetchRow($select);
+
+        $data = array
+        (
+            'key' => $userDetail->getKey(),
+            'value' => $userDetail->getValue()
+        );
         
         if (is_null($row))
         {
-            $this->getDbTable()->insert($userDetail->getAll());
+            // key doesn't exist, insert new key
+            $data['user_id'] = $userDetail->getId();
+            $this->getDbTable()->insert($data);
         }
         else
         {
-            $this->getDbTable()->update($userDetail->getAll(), array('id = ?' => $id));
+            // key exists, update key
+            $this->getDbTable()->update($data, array('user_id = ?' => $userDetail->getId()));
         }
     }
 
@@ -97,7 +106,7 @@ class Default_Model_UserDetailMapper extends DataMapper
     {
         if (null === $this->_dbTable)
         {
-            $this->setDbTable('Default_Model_DbTable_UserMapper');
+            $this->setDbTable('Default_Model_DbTable_UserDetail');
         }
         return $this->_dbTable;
     }
