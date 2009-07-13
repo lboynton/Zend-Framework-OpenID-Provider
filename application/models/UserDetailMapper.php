@@ -42,6 +42,10 @@
  */
 class Default_Model_UserDetailMapper extends Default_Model_DataMapper
 {
+    /**
+     * Saves a user detail
+     * @param Default_Model_UserDetail $userDetail User detail to be saved
+     */
     public function save(Default_Model_UserDetail $userDetail)
     {
         // check if key exists
@@ -70,23 +74,12 @@ class Default_Model_UserDetailMapper extends Default_Model_DataMapper
         }
     }
 
-    public function find($id, Default_Model_User $user)
-    {
-        $result = $this->getDbTable()->find($id);
-
-        if (0 == count($result))
-        {
-            return;
-        }
-
-        $row = $result->current();
-
-        $user->setId($row->id);
-        $user->setUsername($row->username);
-        $user->setCreated($row->created);
-    }
-
-    public function fetchAll($id)
+    /**
+     * Finds all the user details associated with a user
+     * @param int $id The user_id of the user who's details should be retrieved
+     * @return Default_Model_UserDetail[] Array of user details
+     */
+    public function findAllById($id)
     {
         $resultSet = $this->getDbTable()->fetchAll($this->getDbTable()->select()->where('user_id = ?', $id));
         $entries   = array();
@@ -102,6 +95,10 @@ class Default_Model_UserDetailMapper extends Default_Model_DataMapper
         return $entries;
     }
 
+    /**
+     * Gets the Zend_Db_Table class for the mapper
+     * @return Zend_Db_Table
+     */
     public function getDbTable()
     {
         if (null === $this->_dbTable)

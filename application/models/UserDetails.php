@@ -51,7 +51,7 @@ class Default_Model_UserDetails
             if(is_null($id)) $id = Zend_Auth::getInstance()->getIdentity()->id;
 
             $mapper = new Default_Model_UserDetailMapper();
-            $details = $mapper->fetchAll($id);
+            $details = $mapper->findAllById($id);
 
             foreach($details as $detail)
             {
