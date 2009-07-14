@@ -91,6 +91,20 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         $user->setCreated($row->created);
     }
 
+    public function findByOpenId($openid)
+    {
+        $select = $this->getDbTable()->select()->where('openid = ?', $openid);
+
+        $row = $this->getDbTable()->fetchRow($select);
+
+        $user = new Default_Model_User();
+        $user->setCreated($row->created);
+        $user->setId($row->id);
+        $user->setUsername($row->username);
+
+        return $user;
+    }
+
     public function fetchAll()
     {
         $resultSet = $this->getDbTable()->fetchAll();

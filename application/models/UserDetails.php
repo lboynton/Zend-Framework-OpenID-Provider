@@ -70,6 +70,8 @@ class Default_Model_UserDetails
     {
         if(is_null($id)) $id = Zend_Auth::getInstance()->getIdentity()->id;
 
+        if(is_null($id)) throw new Exception("Can't get user details. Must specify which user id to retrieve.");
+
         $mapper = new Default_Model_UserDetailMapper();
         $this->_userDetails = $mapper->findAllById($id);
 
@@ -82,6 +84,18 @@ class Default_Model_UserDetails
         }
 
         return $details;
+    }
+
+    /**
+     * Gets the specified user's details
+     * @param string $openid The OpenID of the user whose details should be retrieved
+     */
+    public function getUserDetailsFromOpenId($openid)
+    {
+        $userMapper = new Default_Model_UserMapper();
+        $user = $userMapper->findByOpenId($openid);
+
+        return $this->getUserDetails($user->getId());
     }
 
     public function save()

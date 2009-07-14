@@ -98,7 +98,7 @@ class ProviderController extends Zend_Controller_Action
         $this->view->user = $server->getLoggedInUser();
 
         $userDetails = new Default_Model_UserDetails();
-        $sreg = new Zend_OpenId_Extension_Sreg($userDetails->getUserDetails());
+        $sreg = new Zend_OpenId_Extension_Sreg($userDetails->getUserDetailsFromOpenId($server->getLoggedInUser()));
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['openid_action']) &&
             $_POST['openid_action'] === 'trust')
