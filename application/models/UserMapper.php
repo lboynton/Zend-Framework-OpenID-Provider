@@ -97,6 +97,12 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         return $user;
     }
 
+    public function findSites($id)
+    {
+        $user = $this->getDbTable()->find($id)->current();
+        return $user->findDependentRowset('Default_Model_DbTable_Site');
+    }
+
     public function fetchAll()
     {
         $resultSet = $this->getDbTable()->fetchAll();

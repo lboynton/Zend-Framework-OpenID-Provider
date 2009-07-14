@@ -43,5 +43,13 @@
 class Default_Model_DbTable_Site extends Zend_Db_Table_Abstract
 {
     protected $_name    = 'sites';
+    protected $_dependentTables = array('Default_Model_DbTable_User');
+
+    protected $_referenceMap    = array(
+        'Default_Model_DbTable_User' => array(
+            'columns'           => 'openid',
+            'refTableClass'     => 'Default_Model_DbTable_User',
+            'refColumns'        => 'openid'
+        )
+    );
 }
-?>

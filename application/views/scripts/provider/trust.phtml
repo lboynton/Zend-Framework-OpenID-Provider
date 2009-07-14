@@ -3,7 +3,7 @@
 <a href="<?php echo htmlspecialchars($this->user);?>"><?php echo htmlspecialchars($this->user);?></a>
 is your identity URL. Would you like to allow or deny the connection?</p>
 <form method="post">
-    <p><input type="checkbox" name="forever"><label for="forever">Forever</label></p>
+    <p><input type="checkbox" name="forever"><label for="forever">Trust forever</label></p>
     <input type="hidden" name="openid_action" value="trust">
     <input type="submit" name="allow" value="Allow">
     <input type="submit" name="deny" value="Deny">

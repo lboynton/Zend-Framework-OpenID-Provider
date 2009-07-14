@@ -178,4 +178,12 @@ class Default_Model_User
     {
         return $this->getMapper()->fetchAll();
     }
+
+    public function findSites($id = null)
+    {
+        if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $sites = $this->getMapper()->findSites($id);
+        return $sites;
+    }
 }

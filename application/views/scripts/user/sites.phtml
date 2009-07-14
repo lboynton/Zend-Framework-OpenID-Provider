@@ -1,0 +1,22 @@
+<p>These are the sites you have permanently marked as trusted. A confirmation is not required for these sites.</p>
+<table>
+    <tr>
+        <th>Date/time</th><th>Web Address</th><th>Actions</th>
+    </tr>
+    <?php foreach($this->sites as $site): ?>
+    <tr>
+        <td><?php echo $this->escape($site['time']); ?></td>
+        <td><?php echo $this->escape($site['site']); ?></td>
+        <td class="action">
+            <form action="/site/edit" method="get">
+                <input type="hidden" name="id" value="<?php echo $this->escape($site['id']); ?>" />
+                <input type="submit" value="Edit" />
+            </form>
+            <form action="/site/delete" method="get">
+                <input type="hidden" name="id" value="<?php echo $this->escape($site['id']); ?>" />
+                <input type="submit" value="Delete" />
+            </form>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

@@ -126,3 +126,11 @@ fieldset dd
     margin:0;
     width:800px;
 }
+td form
+{
+    display:inline;
+}
+table .action
+{
+    width:120px;
+}

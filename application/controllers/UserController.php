@@ -169,6 +169,17 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
+    /**
+     * List trusted sites for logged in user
+     */
+    function sitesAction()
+    {
+        $this->view->title = "Trusted Sites";
+
+        $user = new Default_Model_User();
+        $this->view->sites = $user->findSites()->toArray();
+    }
+
     public function getAuthAdapter(array $params)
     {
         $dbAdapter = Zend_Db_Table::getDefaultAdapter();
