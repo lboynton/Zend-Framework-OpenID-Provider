@@ -65,11 +65,6 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         }
         else
         {
-            $data = array
-            (
-                'password'  => $user->getPassword()
-            );
-
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
 
@@ -90,6 +85,7 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         $user->setId($row->id);
         $user->setUsername($row->username);
         $user->setCreated($row->created);
+        $user->setUserType($row->user_type);
     }
 
     public function findByOpenId($openid)
