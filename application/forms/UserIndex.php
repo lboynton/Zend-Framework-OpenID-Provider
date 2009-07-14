@@ -90,7 +90,7 @@ class Default_Form_UserIndex extends Zend_Form
             'required'  => false,
             'class'     => 'text',
             'validators' => array(array('date', false, array('d/m/Y'))),
-            'filter'    => array('StringTrim', 'StripTags'),
+            'filters'    => array('StringTrim', 'StripTags'),
         ));
 
         // get the list of countries
