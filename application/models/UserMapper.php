@@ -80,6 +80,7 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         $user->setUsername($row->username);
         $user->setCreated($row->created);
         $user->setUserType($row->user_type);
+        $user->setPassword($row->password);
     }
 
     public function findByOpenId($openid)

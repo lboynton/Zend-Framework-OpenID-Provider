@@ -35,52 +35,52 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
- * User registration form
- *
- * @author Lee Boynton
- */
-class Default_Form_UserPassword extends Zend_Form
+class OpenId_Validate_MatchOldPassword extends Zend_Validate_Abstract
 {
-    public function init()
+    const INCORRECT = 'incorrect';
+
+    /**
+     * Array of error messages
+     * @var array Error messages
+     */
+    protected $_messageTemplates = array
+    (
+        self::INCORRECT => "This does not match your old password"
+    );
+
+    /**
+     * The model which contains the getUsername() and getPassword() methods
+     * @var Model
+     */
+    protected $_model;
+
+    /**
+     *
+     * @param <type> $model The model which contains the password. Must contain
+     * getUsername() and getPassword() methods.
+     */
+    public function __construct($model)
     {
-        $this->setMethod('post');
+        $this->_model = $model;
+    }
 
+    /**
+     * Gets the password from the model and matches it against the value supplied
+     * @param string $value The password to match
+     * @return boolean Returns true if the passwords match, false otherwise
+     */
+    public function isValid($value)
+    {
+        $this->_setValue($value);
 
-        $user = new Default_Model_User();
-        $user->find();
+        $value = md5($this->_model->getUsername().$value);
 
-        $this->addElement('password', 'old_password', array(
-            'label'      => 'Old password',
-            'required'   => true,
-            'class'      => 'text',
-            'validators' => array(new OpenId_Validate_MatchOldPassword($user))
-        ));
+        if(!($this->_model->getPassword() == $value))
+        {
+            $this->_error();
+            return false;
+        }
 
-        $this->addElement('password', 'password', array(
-            'label'      => 'Password',
-            'required'   => true,
-            'validators' => array(array('StringLength', false, 6)),
-            'class'      => 'text'
-        ));
-
-        $this->addElement('password', 'password_confirm', array(
-            'label'      => 'Confirm password',
-            'required'   => true,
-            'class'      => 'text',
-            'validators' => array(new OpenId_Validate_MatchField('password'))
-        ));
-
-        $this->addElement('submit', 'submit', array(
-            'ignore'   => true,
-            'label'    => 'Update',
-        ));
-
-        $this->setDecorators(array(
-            'FormElements',
-            array('HtmlTag', array('tag' => 'fieldset')),
-            array('Description', array('placement' => 'prepend', 'class' => 'error')),
-            'Form'
-        ));
+        return true;
     }
 }
