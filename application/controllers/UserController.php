@@ -37,7 +37,6 @@
 
 class UserController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -108,6 +107,12 @@ class UserController extends Zend_Controller_Action
 
     public function loginAction()
     {
+        // redirect user if logged in
+        if (Zend_Auth::getInstance()->hasIdentity())
+        {
+            $this->_helper->redirector('index', 'user');
+        }
+        
         $this->view->title = "Login";
         $this->view->headTitle($this->view->title, 'PREPEND');
 
