@@ -47,6 +47,7 @@ class Default_Model_User
     protected $_password;
     protected $_created;
     protected $_mapper;
+    protected $_userType;
 
     public function __construct(array $options = null)
     {
@@ -128,6 +129,16 @@ class Default_Model_User
     public function getCreated()
     {
         return $this->_created;
+    }
+
+    public function setUserType($type)
+    {
+        $this->_userType = $type;
+    }
+
+    public function getUserType()
+    {
+        return $this->_userType;
     }
 
     public function setMapper($mapper)

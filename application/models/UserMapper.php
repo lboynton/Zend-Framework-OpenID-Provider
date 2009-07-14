@@ -46,10 +46,11 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
     {
         $data = array
         (
-            'username' => $user->getUsername(),
-            'password' => md5($user->getUsername().$user->getPassword()),
-            'created'  => date('Y-m-d H:i:s'),
-            'openid' => Zend_OpenId::absoluteURL('/?user=' . $user->getUsername())
+            'username'  => $user->getUsername(),
+            'password'  => md5($user->getUsername().$user->getPassword()),
+            'created'   => date('Y-m-d H:i:s'),
+            'openid'    => Zend_OpenId::absoluteURL('/?user=' . $user->getUsername()),
+            'user_type' => $user->getUserType()
         );
         
         if (null === ($id = $user->getId()))

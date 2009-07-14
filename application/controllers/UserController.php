@@ -83,6 +83,7 @@ class UserController extends Zend_Controller_Action
             if ($form->isValid($request->getPost()))
             {
                 $model = new Default_Model_User($form->getValues());
+                $model->setUserType("member");
                 $model->save();
 
                 $detailModel = new Default_Model_UserDetail();
