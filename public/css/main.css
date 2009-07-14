@@ -59,7 +59,11 @@ h1 a:hover
 #container
 {
     background:#FFF;
-    padding:25px;
+    padding:0 25px 25px 25px;
+}
+#header
+{
+    margin:25px 0 5px 0;
 }
 #header img
 {
@@ -89,4 +93,19 @@ fieldset dd
 #submit-element
 {
     margin:0;
+}
+#navigation
+{
+    margin:18px 0 5px 0;
+}
+#navigation ul
+{
+    list-style:none;
+    margin:0;
+    text-align:right;
+}
+#navigation h5
+{
+    margin:0;
+    padding:0;
 }
