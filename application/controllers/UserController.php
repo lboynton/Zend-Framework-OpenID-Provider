@@ -46,6 +46,7 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->headTitle("User Profile", 'PREPEND');
+        $this->view->openId = Zend_Auth::getInstance()->getIdentity()->openid;
 
         $request = $this->getRequest();
         $form    = new Default_Form_UserIndex();
