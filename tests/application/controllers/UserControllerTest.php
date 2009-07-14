@@ -45,9 +45,10 @@ class UserControllerTest extends ControllerTestCase
     
     public function testIndexAction()
     {
+        // TODO: Test it goes to correct action when logged in
         $this->dispatch('/user');
         $this->assertController('user');
-        $this->assertAction('index');
+        $this->assertAction('login');
     }
     
     public function testLoginAction()
@@ -66,9 +67,10 @@ class UserControllerTest extends ControllerTestCase
 
     public function testLogoutAction()
     {
+        // TODO: Test it goes to correct action when logged in
         $this->dispatch('/user/logout');
         $this->assertController('user');
-        $this->assertAction('logout');
+        $this->assertAction('login');
     }
 
     public function loginUser($user, $password)

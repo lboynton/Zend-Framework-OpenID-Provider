@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * TODO: Direct to error controller if requested controller/action doesn't exist
  * Access Control List manager for the website
  */
 class OpenId_Controller_Plugin_AclManager extends Zend_Controller_Plugin_Abstract
