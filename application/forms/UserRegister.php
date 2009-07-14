@@ -36,7 +36,7 @@
  */
 
 /**
- *
+ * User registration form
  *
  * @author Lee Boynton
  */
@@ -76,8 +76,9 @@ class Default_Form_UserRegister extends Zend_Form
 
         $this->addElement('password', 'password_confirm', array(
             'label'      => 'Confirm password',
-            'required'   => false,
-            'class'      => 'text'
+            'required'   => true,
+            'class'      => 'text',
+            'validators' => array(new OpenId_Validate_MatchField('password'))
         ));
 
         /*
