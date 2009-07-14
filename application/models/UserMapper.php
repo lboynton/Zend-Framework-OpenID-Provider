@@ -55,13 +55,7 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
         
         if (null === ($id = $user->getId()))
         {
-            //$storage = new OpenId_OpenId_Provider_Storage_Db(new Default_Model_DbTable_User(), new Default_Model_DbTable_Site(), new Default_Model_DbTable_Association());
-            //$server = new Zend_OpenId_Provider("/provider/login", "/provider/trust", null, $storage);
-
-            //$username = Zend_OpenId::absoluteURL('/?user=' . $user->getUsername());
-
             $id = $this->getDbTable()->insert($data);
-            //$server->register($user->getUsername(), $user->getPassword());
         }
         else
         {
