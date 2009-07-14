@@ -272,7 +272,6 @@ class Default_Model_User
         if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
 
         $sites = $this->getMapper()->findSites($id);
-        die(var_dump($sites));
         return $sites;
     }
 }
