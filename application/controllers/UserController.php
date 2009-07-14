@@ -143,6 +143,31 @@ class UserController extends Zend_Controller_Action
         $this->_helper->redirector('login', 'user');
     }
 
+    public function passwordAction()
+    {
+        $this->view->headTitle("Change Password", 'PREPEND');
+
+        $request = $this->getRequest();
+        $form = new Default_Form_UserPassword();
+
+        if ($this->getRequest()->isPost())
+        {
+            if ($form->isValid($request->getPost()))
+            {
+                $model = new Default_Model_User();
+                $user = $model->find();
+                $user->setPassword($form->getValue("password"));
+                $user->save();
+            }
+            else
+            {
+                $form->setDescription("Sorry, your password could not be changed. Please check for errors below.");
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
     public function getAuthAdapter(array $params)
     {
         $dbAdapter = Zend_Db_Table::getDefaultAdapter();
