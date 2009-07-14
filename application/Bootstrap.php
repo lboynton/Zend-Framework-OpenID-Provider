@@ -57,5 +57,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
     }
+
+    protected function _initAclRules()
+    {
+        // apply the ACL manager to provide access control
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(new OpenId_Controller_Plugin_AclManager(Zend_Auth::getInstance()));
+    }
 }
 

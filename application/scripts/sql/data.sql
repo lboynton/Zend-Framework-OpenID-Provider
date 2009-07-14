@@ -1,1 +1,2 @@
-insert into users (username, password, openid, created) VALUES ('testuser', 'a45adc8ea23392523a6431f16fbdea9d', 'http://localhost/?user=testuser', 2009);
+insert into users (id, username, password, openid, created, user_type) VALUES (1, 'testuser', 'a45adc8ea23392523a6431f16fbdea9d', 'http://localhost/?user=testuser', '2009-01-01 00:00:00+00', 'member');
+insert into user_details (user_id, key, value) VALUES (1, 'email', 'test@test.com');

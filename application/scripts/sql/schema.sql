@@ -8,17 +8,8 @@ CREATE TABLE users
     username character varying(255) NOT NULL UNIQUE,
     password character varying(32) NOT NULL,
     openid character varying(1000) NOT NULL,
-    --name character varying(255),
-    --nickname character varying(255),
-    --email character varying(255),
-    created timestamp with time zone NOT NULL
-    --dob date,
-    --gender character varying(6),
-    --postcode character varying(20),
-    --country character varying(255),
-    --language character varying(255),
-    --timezone character varying(255),
-    --user_type character varying(10),
+    created timestamp with time zone NOT NULL,
+    user_type character varying(10)
 );
 
 ALTER TABLE users OWNER TO openid2;
@@ -30,7 +21,7 @@ CREATE TABLE user_details
     user_id int NOT NULL,
     key character varying(255) NOT NULL,
     value character varying(255),
-    primary key(user_id, key),
+    primary key(user_id, key)
 );
 
 ALTER TABLE user_details OWNER TO openid2;
