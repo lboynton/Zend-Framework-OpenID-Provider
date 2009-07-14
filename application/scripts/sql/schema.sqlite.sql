@@ -6,7 +6,8 @@ CREATE TABLE users
     username character varying(255) NOT NULL UNIQUE,
     password character varying(32) NOT NULL,
     openid character varying(1000) NOT NULL,
-    created timestamp with time zone NOT NULL
+    created timestamp with time zone NOT NULL,
+    user_type character varying(10)
 );
 
 drop table if exists user_details;
