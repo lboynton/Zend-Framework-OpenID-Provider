@@ -116,7 +116,13 @@ fieldset dd
     color:#f7931e;
     font-size:16px;
 }
-#openid span
+#openid input
 {
     font-style:italic;
+    border:none;
+    background:none;
+    color:#f7931e;
+    font-size:16px;
+    margin:0;
+    width:800px;
 }
