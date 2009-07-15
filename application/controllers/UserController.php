@@ -86,6 +86,7 @@ class UserController extends Zend_Controller_Action
                 $model->setUserType("member");
                 $model->save();
 
+                // TODO: Change this so that all user details can be saved in one go
                 $detailModel = new Default_Model_UserDetail();
                 $detailModel->setKey("nickname");
                 $detailModel->setValue($form->getValue("nickname"));
@@ -93,8 +94,14 @@ class UserController extends Zend_Controller_Action
                 $detailModel->save();
 
                 $detailModel = new Default_Model_UserDetail();
-                $detailModel->setKey("name");
-                $detailModel->setValue($form->getValue("name"));
+                $detailModel->setKey("fullname");
+                $detailModel->setValue($form->getValue("fullname"));
+                $detailModel->setId($model->getId());
+                $detailModel->save();
+
+                $detailModel = new Default_Model_UserDetail();
+                $detailModel->setKey("email");
+                $detailModel->setValue($form->getValue("email"));
                 $detailModel->setId($model->getId());
                 $detailModel->save();
 
