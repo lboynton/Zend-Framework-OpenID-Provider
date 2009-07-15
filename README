@@ -1,0 +1,5 @@
+[Installation]
+Change public/.htaccess to contain the correct application environment (production, development, testing)
+Check application/configs/application.ini contains correct database settings
+Run application/scripts/loadSchema.php to set up the database if you intend to use SQLite. Other databases may require manual configuration, the application/scripts/sql directory contains the schema.
+Check permissions on sqlite database and ensure read/write access is applied to the file and its parent directories
