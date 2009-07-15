@@ -47,14 +47,14 @@ class Default_Form_UserRegister extends Zend_Form
         $this->setMethod('post');
 
         $this->addElement('text', 'fullname', array(
-            'label'      => 'Name',
+            'label'      => 'Name (optional)',
             'required'   => false,
             'filters'    => array('StringTrim', 'StripTags'),
             'class'      => 'title'
         ));
 
         $this->addElement('text', 'nickname', array(
-            'label'      => 'Nickname',
+            'label'      => 'Nickname (optional)',
             'required'   => false,
             'filters'    => array('StringTrim', 'StripTags'),
             'class'      => 'text'
