@@ -36,7 +36,7 @@
  */
 
 /**
- * Description of Default_Model_User
+ * Represents an individual user
  *
  * @author Lee Boynton
  */
@@ -49,6 +49,10 @@ class Default_Model_User
     protected $_mapper;
     protected $_userType;
 
+    /**
+     * Create a new user with specified values
+     * @param array $options Key/value pairs of options for the user
+     */
     public function __construct(array $options = null)
     {
         if (is_array($options))
@@ -57,6 +61,11 @@ class Default_Model_User
         }
     }
 
+    /**
+     * Sets user property
+     * @param string $name Name of the property to set
+     * @param string $value Value of the property
+     */
     public function __set($name, $value)
     {
         $method = 'set' . $name;
@@ -67,6 +76,11 @@ class Default_Model_User
         $this->$method($value);
     }
 
+    /**
+     * Gets user property
+     * @param string $name Name of the property to set
+     * @return string Value of the property
+     */
     public function __get($name)
     {
         $method = 'get' . $name;
@@ -77,6 +91,12 @@ class Default_Model_User
         return $this->$method();
     }
 
+    /**
+     * Sets multiple user properties. Will only set properties which have setter
+     * methods.
+     * @param array $options Array of properties to set
+     * @return Default_Model_User
+     */
     public function setOptions(array $options)
     {
         $methods = get_class_methods($this);
@@ -91,62 +111,111 @@ class Default_Model_User
         return $this;
     }
 
+    /**
+     * Gets the user's id
+     * @return int ID
+     */
     public function getId()
     {
         return $this->_id;
     }
 
+    /**
+     * Sets the user's id
+     * @param int $id ID
+     */
     public function setId($id)
     {
         $this->_id = $id;
     }
 
+    /**
+     * Gets the user's username
+     * @return string Username
+     */
     public function getUsername()
     {
         return $this->_username;
     }
 
+    /**
+     * Sets the user's username
+     * @param String $username Username
+     */
     public function setUsername($username)
     {
         $this->_username = $username;
     }
 
+    /**
+     * Gets the user's password
+     * @return string Password
+     */
     public function getPassword()
     {
         return $this->_password;
     }
 
+    /**
+     * Sets the user's password
+     * @param string $password Password
+     */
     public function setPassword($password)
     {
         $this->_password = $password;
     }
 
+    /**
+     * Sets the date the user registered
+     * @param string $created Date
+     */
     public function setCreated($created)
     {
         $this->_created = $created;
     }
 
+    /**
+     * Gets the date the user registered
+     * @return string Date
+     */
     public function getCreated()
     {
         return $this->_created;
     }
 
+    /**
+     * Sets the user type (e.g. member, admin)
+     * @param string $type User type
+     */
     public function setUserType($type)
     {
         $this->_userType = $type;
     }
 
+    /**
+     * Gets the user type
+     * @return string User type
+     */
     public function getUserType()
     {
         return $this->_userType;
     }
 
+    /**
+     * Sets the data mapper
+     * @param Default_Model_DataMapper $mapper
+     * @return Default_Model_DataMapper
+     */
     public function setMapper($mapper)
     {
         $this->_mapper = $mapper;
         return $this;
     }
 
+    /**
+     * Gets the data mapper
+     * @return Default_Model_DataMapper Data mapper
+     */
     public function getMapper()
     {
         if (null === $this->_mapper)
@@ -156,29 +225,48 @@ class Default_Model_User
         return $this->_mapper;
     }
 
+    /**
+     * Saves this user in persistent storage
+     */
     public function save()
     {
         $id = $this->getMapper()->save($this);
 
+        // get id if this is a new user
         if (is_null($this->_id))
         {
             $this->_id = $id;
         }
     }
 
+    /**
+     * Find user with given id
+     * @param int $id Id of user to find. If null finds currently logged in user
+     * @return Default_Model_User The user that was found
+     */
     public function find($id = null)
     {
+        // get id of currently logged in user if id is null
         if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
 
         $this->getMapper()->find($id, $this);
         return $this;
     }
 
+    /**
+     * Gets all users
+     * @return array Collection of Default_Model_User
+     */
     public function fetchAll()
     {
         return $this->getMapper()->fetchAll();
     }
 
+    /**
+     * Gets the user's trusted sites
+     * @param int $id ID of the user
+     * @return Zend_Db_Table_Rowset Trusted sties
+     */
     public function findSites($id = null)
     {
         if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;

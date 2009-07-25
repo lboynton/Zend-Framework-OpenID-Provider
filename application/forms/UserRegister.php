@@ -47,14 +47,14 @@ class Default_Form_UserRegister extends Zend_Form
         $this->setMethod('post');
 
         $this->addElement('text', 'fullname', array(
-            'label'      => 'Name',
+            'label'      => 'Name (optional)',
             'required'   => false,
             'filters'    => array('StringTrim', 'StripTags'),
             'class'      => 'title'
         ));
 
         $this->addElement('text', 'nickname', array(
-            'label'      => 'Nickname',
+            'label'      => 'Nickname (optional)',
             'required'   => false,
             'filters'    => array('StringTrim', 'StripTags'),
             'class'      => 'text'
@@ -81,44 +81,33 @@ class Default_Form_UserRegister extends Zend_Form
             'validators' => array(new OpenId_Validate_MatchField('password'))
         ));
 
-        /*
-        
-
-        
-
         $this->addElement('text', 'email', array(
             'label'      => 'Email address',
             'required'   => true,
+            'class'      => 'text',
             'filters'    => array('StringTrim', 'StripTags'),
             'validators' => array('EmailAddress')
         ));
-         * 
-         */
 
-        /**
         $this->addElement('captcha', 'captcha', array(
             'label'      => 'Please enter the 5 letters displayed below:',
             'required'   => true,
+            'class'      => 'text',
             'captcha'    => array(
                 'captcha' => 'Figlet',
                 'wordLen' => 5,
                 'timeout' => 300
             )
         ));
-         * 
-         */
 
         $this->addElement('submit', 'submit', array(
             'ignore'   => true,
             'label'    => 'Register',
         ));
 
-/*
         $this->addElement('hash', 'csrf', array(
             'ignore' => true,
         ));
- * 
- */
 
         $this->setDecorators(array(
             'FormElements',

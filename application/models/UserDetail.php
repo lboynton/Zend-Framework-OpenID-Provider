@@ -36,7 +36,9 @@
  */
 
 /**
- * Description of UserDetail
+ * A user's personal information, such as name, email etc. Details are stored as
+ * key/values. The name of the personal information is stored in the key, the
+ * information itself is stored in the value.
  *
  * @author Lee Boynton
  */
@@ -47,42 +49,75 @@ class Default_Model_UserDetail
     protected $_value;
     protected $_mapper;
 
+    /**
+     * Gets the ID of the user this user detail belongs to
+     * @return int User ID
+     */
     public function getId()
     {
         return $this->_id;
     }
 
+    /**
+     * Sets the ID of the user this user detail belongs to
+     * @param int $id User ID
+     */
     public function setId($id)
     {
         $this->_id = $id;
     }
 
+    /**
+     * Gets the name of the user detail
+     * @return string Name of user detail
+     */
     public function getKey()
     {
         return $this->_key;
     }
 
+    /**
+     * Sets the name of the user detail
+     * @param string $key Name of user detail
+     */
     public function setKey($key)
     {
         $this->_key = $key;
     }
 
+    /**
+     * Gets the value of the user detail
+     * @return string Value
+     */
     public function getValue()
     {
         return $this->_value;
     }
 
+    /**
+     * Sets the value of the user detail
+     * @param string $value Value
+     */
     public function setValue($value)
     {
         $this->_value = $value;
     }
 
+    /**
+     * Sets the data mapper
+     * @param Default_Model_DataMapper $mapper Data mapper
+     * @return Default_Model_UserDetail
+     */
     public function setMapper($mapper)
     {
         $this->_mapper = $mapper;
         return $this;
     }
 
+    /**
+     * Gets the data mapper
+     * @return Default_Model_DataMapper Data mapper
+     */
     public function getMapper()
     {
         if (null === $this->_mapper)
@@ -92,16 +127,11 @@ class Default_Model_UserDetail
         return $this->_mapper;
     }
 
+    /**
+     * Saves this user detail in persistent storage
+     */
     public function save()
     {
         $this->getMapper()->save($this);
-    }
-
-    public function find($id = null)
-    {
-        if($id == null) $id = Zend_Auth::getInstance()->getIdentity()->id;
-
-        $this->getMapper()->find($id, $this);
-        return $this;
     }
 }

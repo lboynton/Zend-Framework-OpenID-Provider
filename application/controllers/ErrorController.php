@@ -37,6 +37,13 @@
 
 class ErrorController extends Zend_Controller_Action
 {
+    protected $_logger;
+
+    public function init()
+    {
+        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../error.log');
+        $this->_logger = new Zend_Log($writer);
+    }
 
     public function errorAction()
     {
@@ -49,18 +56,17 @@ class ErrorController extends Zend_Controller_Action
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $this->view->message = 'Page not found';
+                $this->_logger->info('Page not found: ' . $_SERVER['REQUEST_URI']);
                 break;
             default:
                 // application error 
                 $this->getResponse()->setHttpResponseCode(500);
                 $this->view->message = 'Application error';
+                $this->_logger->err('Application error: ' . $errors->exception);
                 break;
         }
         
         $this->view->exception = $errors->exception;
         $this->view->request   = $errors->request;
     }
-
-
 }
-
