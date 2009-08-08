@@ -114,7 +114,7 @@ class Default_Form_UserIndex extends Zend_Form
         ->addFilter('StringTrim')
         ->addValidator('NotEmpty');
 
-        $languages = Zend_Locale::getLanguageTranslationList('en');
+        $languages = Zend_Locale::getTranslationList('Language', 'en');
         asort($languages, SORT_LOCALE_STRING);
 
         $language = new Zend_Form_Element_Select('language');
