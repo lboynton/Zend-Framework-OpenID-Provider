@@ -46,7 +46,9 @@ class IndexController extends Zend_Controller_Action
     {
         $this->view->headTitle("User", 'PREPEND');
 
-        if(isset($_GET['user']))
+        $openid = $this->getRequest()->getParam('openid');
+
+        if(isset($openid))
         {
             $this->view->openIdServer = Zend_OpenId::absoluteURL("/provider/");
         }

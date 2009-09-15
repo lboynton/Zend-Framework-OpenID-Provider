@@ -49,7 +49,7 @@ class Default_Model_UserMapper extends Default_Model_DataMapper
             'username'  => $user->getUsername(),
             'password'  => md5($user->getUsername().$user->getPassword()),
             'created'   => date('Y-m-d H:i:s'),
-            'openid'    => Zend_OpenId::absoluteURL('/?user=' . $user->getUsername()),
+            'openid'    => Zend_OpenId::absoluteURL('/openid/' . $user->getUsername()),
             'user_type' => $user->getUserType()
         );
         

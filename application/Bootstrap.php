@@ -40,11 +40,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initAutoload()
     {
         $autoloader = new Zend_Application_Module_Autoloader
-        (
+            (
             array
             (
-                'namespace' => 'Default_',
-                'basePath'  => dirname(__FILE__),
+            'namespace' => 'Default_',
+            'basePath'  => dirname(__FILE__),
             )
         );
 
@@ -63,6 +63,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // apply the ACL manager to provide access control
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(new OpenId_Controller_Plugin_AclManager(Zend_Auth::getInstance()));
+    }
+
+    protected function _initRoutes()
+    {
+        $ctrl = Zend_Controller_Front::getInstance();
+        $router = $ctrl->getRouter(); // returns a rewrite router by default
+        $router->addRoute
+        (
+            'openid',
+            new Zend_Controller_Router_Route('openid/:openid',
+            array('controller' => 'index',
+            'action' => 'index'))
+        );
     }
 }
 

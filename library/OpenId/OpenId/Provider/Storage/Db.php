@@ -138,7 +138,7 @@ class OpenId_OpenId_Provider_Storage_Db extends Zend_OpenId_Provider_Storage
             'username' => $id,
             'password' => $password,
             'created'  => date('Y-m-d H:i:s'),
-            'openid' => Zend_OpenId::absoluteURL('/?user=' . $id)
+            'openid' => Zend_OpenId::absoluteURL('/openid/' . $id)
         );
 
         if($this->hasUser($id)) return false;
